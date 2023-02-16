@@ -4,7 +4,7 @@
 - Create a new branch off of `master`
 - Create a simple blog site with the following pages:
   - Login / registration page, we will only authenticate by email, no passwords necessary
-  - List of all posts by all users (include the number of comments per post)
+  - List all posts by all users (include the number of comments per post)
   - Create / update post
   - View post with the ability to comment
   - A report page showing the users with the most posts and the users with the most comments
@@ -22,7 +22,7 @@
 - Test and lint all code (see [Application Instructions](#application-instructions))
 
 ## Submission
-Please push your working branch upstream so it can be reviewed and evaluated
+Please push your working branch upstream so it can be reviewed and evaluated.
 
 # Application Instructions
 
@@ -33,7 +33,7 @@ Please push your working branch upstream so it can be reviewed and evaluated
 5. The application should now be available at http://localhost:8002
 
 ## Debugging
-- Make sure var and vendor have read/write/execute permission (777) for everyone (composer can't install if vendor can't be written to)
+- Make sure **var** and **vendor** have read/write/execute permission (777) for everyone (composer can't install if vendor can't be written to)
 
 ## Running tests
 You can run tests with the following command:
