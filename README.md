@@ -1,7 +1,7 @@
 # Symfony PHP Quiz
 
 ## Tasks to complete
-- Create a new branch off of `master`
+- Create a new branch off of `main`
 - Create a simple blog site with the following pages:
   - Login / registration page, we will only authenticate by email, no passwords necessary
   - List all posts by all users (include the number of comments per post)
