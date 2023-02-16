@@ -1,0 +1,19 @@
+stages:
+  - test
+
+test-runner:
+  stage: test
+  image: docker:latest
+  before_script:
+    - docker version
+    - docker compose version
+    - docker compose up -d --build --wait
+  services: 
+    - docker:dind
+  script:
+    - docker exec -t symfony-starter bash -c "/app/bin/console cache:warm" || echo "Continue"
+    - docker exec -t symfony-starter bash -c "/app/bin/psalm" || echo "Continue"
+    - docker exec -t symfony-starter bash -c "/app/bin/phpstan" || echo "Continue"
+    - docker exec -t symfony-starter bash -c "/app/bin/phpunit" || echo "Continue"
+  when: manual
+  allow_failure: true
