@@ -3,26 +3,26 @@
 ## Tasks to complete
 - Create a new branch off of `main`
 - Create a simple blog site with the following pages:
-  - Login / registration page, we will only authenticate by email, no passwords necessary
-  - List all posts by all users (include the number of comments per post)
+  - Login / registration page, we will only authenticate by email, no passwords necessary (we are very trusting)
   - Create / update post
+  - List all posts and optionally filter by a user (include the number of comments per post)
   - View post with the ability to comment
   - A report page showing the users with the most posts and the users with the most comments
 - Site requirements
   - Only owners can modify posts
   - All users can comment on posts
   - Do not use FOS User Bundle or any bundled authentication system, keep this part as simple as possible
-  - List the number of comments per post
-- Create several commands for managing the site and gather statistics
+  - Assume the database is huge and contains LOTS of posts and comments
+- Create several console commands for managing the site and gather statistics
   - Create a new user
   - Return total posts by user's email
-  - Return total comments by users' email
+  - Return total comments by user's email
   - List all posts, with option to limit the results
 - Write unit tests
 - Test and lint all code (see [Application Instructions](#application-instructions))
 
 ## Submission
-Please push your working branch upstream so it can be reviewed and evaluated.
+Please push your working branch upstream, so it can be reviewed and evaluated.
 
 # Application Instructions
 
@@ -34,23 +34,28 @@ Please push your working branch upstream so it can be reviewed and evaluated.
 
 ## Debugging
 - Make sure **var** and **vendor** have read/write/execute permission (777) for everyone (composer can't install if vendor can't be written to)
+- Send any questions to Jim Furnier (jim@dreamworldpartners.com)
 
 ## Running tests
 You can run tests with the following command:
 ```shell
-docker exec -it symfony-starter bin/phpunit
+docker exec -it symfony-dwp-app bin/phpunit
 ```
 
 ## Linting
 You can execute the [Psalm](https://psalm.dev/) linter with the following command (or docker below):
 ```shell
-docker exec -it symfony-starter bin/psalm
+docker exec -it symfony-dwp-app bin/psalm
 ```
 
 ## Application commands
 Connect to MySQL
 ```shell
 mysql -P 33067 -u app -ppassword --protocol=TCP symfony_starter
+```
+Run a Symfony Console Command
+```shell
+docker exec -it symfony-dwp-app bin/console <myCommand>
 ```
 
 ## More reading materials
