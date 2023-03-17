@@ -35,6 +35,7 @@ Please push your working branch upstream, so it can be reviewed and evaluated.
 ## Debugging
 - Make sure **var** and **vendor** have read/write/execute permission (777) for everyone (composer can't install if vendor can't be written to)
 - Send any questions to Jim Furnier (jim@dreamworldpartners.com)
+- Windows is not recommended as it's a bit buggy and is not an environment we normally develop in.
 
 ## Running tests
 You can run tests with the following command:
@@ -51,7 +52,11 @@ docker exec -it symfony-dwp-app bin/psalm
 ## Application commands
 Connect to MySQL
 ```shell
-mysql -P 33067 -u app -ppassword --protocol=TCP symfony_starter
+docker exec -it symfony-dwp-db mysql -P 3306 -u app -ppassword symfony_starter
+```
+Run MySQL query
+```shell
+docker exec -it symfony-dwp-db mysql -P 3306 -u app -ppassword symfony_starter -e "show tables;"
 ```
 Run a Symfony Console Command
 ```shell
