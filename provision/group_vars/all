@@ -1,0 +1,13 @@
+server:
+    version: focal
+    packages:
+        - rsync
+        - vim
+    db:
+      version: 5.7
+      user: root
+      password: root
+    nginx:
+        user: www-data
+    php:
+        version: 8.0

@@ -1,0 +1,9 @@
+app:
+    id: dwp
+    env: dev
+    sourceDir: "{{ inventory_dir }}/../src/"
+    installDir: /vagrant
+    logDir: /tmp
+    siteName: dwp.test
+    user: vagrant
+    swapSize: 4096

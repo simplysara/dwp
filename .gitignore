@@ -3,7 +3,13 @@
 /.env.local.php
 /.env.*.local
 /config/secrets/prod/prod.decrypt.private.php
-/var/*
+!/var/cache
+/var/cache/*
+!/var/cache/.gitkeep
+!/var/log
+/var/log/*
+!/var/log/.gitkeep
+/var/
 /vendor/*
 ###< symfony/framework-bundle ###
 
@@ -15,6 +21,8 @@
 
 ### Editors ###
 .idea/
+.DS_Store
+.vagrant
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php

@@ -1,0 +1,53 @@
+---
+- name: Check for swapfile
+  become: yes
+  stat:
+    path: /var/swapfile
+  register: swap_file
+
+- name: Write swapfile
+  become: yes
+  shell: |
+    /bin/dd if=/dev/zero of=/var/swapfile bs=1M count={{ app.swapSize }}
+    /bin/chmod 600 /var/swapfile
+    /sbin/mkswap /var/swapfile
+    /sbin/swapon /var/swapfile
+  when: swap_file.stat.exists == False
+
+- name: Add Dev MySQL config
+  become: yes
+  template:
+    src: "dev.cnf"
+    dest: "/etc/mysql/my.cnf"
+  notify:
+    - Restart mysql
+
+- name: Install Dev PHP {{ server.php.version }} packages
+  become: yes
+  apt:
+    update_cache: yes
+    pkg:
+      - phpmyadmin
+    state: present
+    cache_valid_time: 86400
+
+- name: Add PMA config
+  become: yes
+  template:
+    src: "phpmyadmin.config.inc.php"
+    dest: "/etc/phpmyadmin/config.inc.php"
+
+- name: Install PMA Nginx config
+  become: yes
+  template:
+    src: "pma.conf"
+    dest: "/etc/nginx/conf.d/pma.conf"
+  notify:
+    - Restart nginx
+
+- name: Install composer components
+  remote_user: "{{ app.user }}"
+  composer:
+    command: install
+    working_dir: "{{ app.installDir }}"
+    no_dev: no

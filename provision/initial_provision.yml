@@ -1,0 +1,8 @@
+- name: Install a full dev environment
+  hosts: dev
+  roles:
+    - { role: all, become: yes, tags: all }
+    - { role: mysql, become: yes, tags: mysql }
+    - { role: nginx, become: yes, tags: nginx }
+    - { role: php, become: yes, tags: php }
+    - { role: devBox, tags: devBox }
