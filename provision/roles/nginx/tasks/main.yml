@@ -25,6 +25,7 @@
     owner: "{{ app.user }}"
     group: "{{ app.user }}"
     mode: 0775
+  when: not isVagrant|default(False)
 
 - name: Install nginx config
   template:

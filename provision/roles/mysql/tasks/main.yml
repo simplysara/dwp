@@ -4,6 +4,7 @@
     keyserver: keyserver.ubuntu.com
     id: 9334A25F8507EFA5
     state: present
+  when: not arm64|default(False)
 
 - name: Add Percona apt server
   apt_repository:
@@ -13,6 +14,7 @@
   with_items:
     - "deb http://repo.percona.com/apt {{ server.version|default('bionic') }} main"
     - "deb-src http://repo.percona.com/apt {{ server.version|default('bionic') }} main"
+  when: not arm64|default(False)
 
 - name: "Install supporting packages ({{ server.db.version|default('5.7') }})"
   apt:
@@ -22,6 +24,17 @@
       - "percona-server-server-{{ server.db.version|default('5.7') }}"
     state: present
     cache_valid_time: 86400
+  when: not arm64|default(False)
+
+- name: "Install supporting packages (8.0)"
+  apt:
+    update_cache: yes
+    pkg:
+      - "mysql-server-8.0"
+      - "mysql-server-8.0"
+    state: present
+    cache_valid_time: 86400
+  when: arm64|default(False)
 
 - name: Set MySQL root password
   command: /usr/bin/mysql -e "alter user 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '{{ server.db.password }}';"
